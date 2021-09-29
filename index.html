@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <meta http-equiv=”refresh” content="10" />
     </head>
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        if (document.getElementById('led_c_value').innerHTML == 1){
+            document.getElementById('led_c_circle').style = 'circle_lit';
+        }
+        else{
+            document.getElementById('led_c_circle').style = 'circle';
+        }
+        if (document.getElementById('led_d_value').innerHTML == 1){
+            document.getElementById('led_d_circle').style = 'circle_lit';
+        }
+        else{
+            document.getElementById('led_d_circle').style = 'circle';
+        }
+    });
+</script>
     <style>
+        @font-face {
+            font-family: "Roboto";
+            src: url("Roboto-Regular.ttf");
+        }
         body{
-            background-color: #282828;
+            font-family: "Roboto";
+            /* background-color: #282828; */
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-image: url('baardegaam_2.jpg');
         }
         p{
+            color: white;
+            font-size: xx-large;
+        }
+        .p_centered{
             position: absolute;
             width: 100px;
             height: 100px;
@@ -17,10 +47,42 @@
             font-size: xx-large;
             vertical-align: middle;
             text-align: center;
+            background-color: transparent;
         }
+        .hidden_value{
+            opacity: 0;
+            pointer-events: none;
+        }
+        .circle {
+            /* float: left; */
+            height: 50px;
+            width: 50px;
+            background-color: #555;
+            border-radius: 50%;
+        }
+        .circle_lit {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .led_name{
+            float: left;
+        }
+        
     </style>
 <body>
-    <p>TEST</p>
+    <div>
+        <p class="led_name">LED C</p>
+        <div id="led_c_circle" class="circle"></div>
+    </div>
+    <div>
+        <p class="led_name">LED C</p>
+        <div id="led_d_circle" class="circle"></div>
+    </div>
+    
+    <p id="led_c_value" class="hidden_value">:="light_C":</p>
+    <p id="led_d_value" class="hidden_value">:="light_D":</p>
     
 
 </body>
