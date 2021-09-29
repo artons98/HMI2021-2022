@@ -1,37 +1,92 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv=”refresh” content="10" />
+
     </head>
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        if (document.getElementById('led_c_value').innerHTML == 1){
-            document.getElementById('led_c_circle').style = 'circle_lit';
+    <script>
+        
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds){
+                break;
+                }
+            }
         }
-        else{
-            document.getElementById('led_c_circle').style = 'circle';
+        function toggleC(){
+            if(document.getElementById('led_c_value').innerHTML == "1"){
+                document.getElementById("c_off_form").submit();
+            }
+            else{
+                document.getElementById("c_on_form").submit();
+            }
         }
-        if (document.getElementById('led_d_value').innerHTML == 1){
-            document.getElementById('led_d_circle').style = 'circle_lit';
+        function toggleD(){
+            if(document.getElementById('led_d_value').innerHTML == "1"){
+                document.getElementById("d_off_form").submit();
+            }
+            else{
+                document.getElementById("d_on_form").submit();
+            }
         }
-        else{
-            document.getElementById('led_d_circle').style = 'circle';
+        function toggleE(){
+            if(document.getElementById('led_e_value').innerHTML == "1"){
+                document.getElementById("e_off_form").submit();
+            }
+            else{
+                document.getElementById("e_on_form").submit();
+            }
         }
-    });
-</script>
+        document.addEventListener("DOMContentLoaded", function(){
+            var led_c_value_element = document.getElementById('led_c_value');
+            var led_c_circle_element = document.getElementById('led_c_circle');
+            var led_d_value_element = document.getElementById('led_d_value');
+            var led_d_circle_element = document.getElementById('led_d_circle');
+            var led_e_value_element = document.getElementById('led_e_value');
+            var led_e_circle_element = document.getElementById('led_e_circle');
+
+            while(false){
+                //console.log(document.getElementById('led_c_value').innerHTML);
+                //console.log(document.getElementById('led_c_value').value);
+                if (led_c_value_element.innerHTML == "1"){
+                    led_c_circle_element.style.color = "red";
+                }
+                else{
+                    led_c_circle_element.style = 'circle';
+                }
+                if (led_c_value_element.innerHTML == "1"){
+                    led_d_circle_element.style = 'circle_lit';
+                }
+                else{
+                    led_d_circle_element.style = 'circle';
+                }
+                if (led_e_value_element.innerHTML == "1"){
+                    led_e_circle_element.style = 'circle_lit';
+                }
+                else{
+                    led_e_circle_element.style = 'circle';
+                }
+                sleep(250);
+                window.top.location = window.top.location;
+                //console.log('reloaded html ' + i +' times');
+                //i++;
+            }
+        });
+    </script>
     <style>
         @font-face {
             font-family: "Roboto";
             src: url("Roboto-Regular.ttf");
         }
         body{
+            color: white;
             font-family: "Roboto";
-            /* background-color: #282828; */
+            background-color: #282828;
             position: absolute;
             height: 100%;
             width: 100%;
             overflow: hidden;
-            background-image: url('baardegaam_2.jpg');
+            /*background-image: url('baardegaam_2.jpg');*/
         }
         p{
             color: white;
@@ -54,36 +109,119 @@
             pointer-events: none;
         }
         .circle {
-            /* float: left; */
+            position: relative;
+            float: right;
             height: 50px;
             width: 50px;
             background-color: #555;
             border-radius: 50%;
         }
         .circle_lit {
+            position: relative;
+            float: right;
             height: 50px;
             width: 50px;
             background-color: red;
             border-radius: 50%;
         }
         .led_name{
+            position: relative;
             float: left;
+            height: 50px;
+            width: 100px;
+            background-color: transparent;
+            font-size: x-large;
+            line-height: 50px;
         }
-        
-    </style>
-<body>
-    <div>
-        <p class="led_name">LED C</p>
-        <div id="led_c_circle" class="circle"></div>
-    </div>
-    <div>
-        <p class="led_name">LED C</p>
-        <div id="led_d_circle" class="circle"></div>
-    </div>
-    
-    <p id="led_c_value" class="hidden_value">:="light_C":</p>
-    <p id="led_d_value" class="hidden_value">:="light_D":</p>
-    
+        .led_info_item{
+            padding: 10px;
+            padding-bottom: 0px;
+            width: fit-content;
+            height: 60px;
+            background-color: #303030;
+            position: relative;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .led_info_item:hover{
+            box-shadow: 0px 0px 10px 0px rgb(255, 255, 255);
+        }
+        .led_info_container{
+            padding: 5px;
+            width: fit-content;
+            height: fit-content;
+            background-color: transparent;
+            position: relative;
+            border-radius: 10px;
+            float: right;
+            margin-right: 20px;
+        }
+        .hidden_form{
+            opacity: 0;
+            pointer-events: none;
+        }
 
-</body>
+    </style>
+    <body>
+        <!-- AWP_In_Variable Name='"light_C"' -->
+        <!-- AWP_In_Variable Name='"light_D"' -->
+        <!-- AWP_In_Variable Name='"light_E"' -->
+        <!-- :="light_C": -->
+        <!-- :="light_D": -->
+        <div class="led_info_container">
+            <div class="led_info_item" onclick="toggleC()">
+                <div class="led_name">LED C</div>
+                <div id="led_c_circle" class="circle"></div>
+            </div>
+            <div class="led_info_item" onclick="toggleD()">
+                <div class="led_name">LED D</div>
+                <div id="led_d_circle" class="circle"></div>
+            </div>
+            <div class="led_info_item" onclick="toggleE()">
+                <div class="led_name">LED E</div>
+                <div id="led_e_circle" class="circle"></div>
+            </div>
+        </div>
+        <form id="c_on_form" method="post" action="" class="hidden_form">
+            <input type="submit" value="LED C Aanzetten">
+            <input type="hidden" name='"light_C"' value="1">
+        </form>
+
+        <form id="c_off_form" method="post" action="" class="hidden_form">
+            <input type="submit" value="LED C Uitzetten">
+            <input type="hidden" name='"light_C"' value="0">
+        </form>
+
+        <form id="d_on_form" method="post" action="" class="hidden_form">
+            <input type="submit" value="LED D Aanzetten">
+            <input type="hidden" name='"light_D"' value="1">
+        </form>
+
+        <form id="d_off_form" method="post" action="" class="hidden_form">
+            <input type="submit" value="LED D Uitzetten">
+            <input type="hidden" name='"light_D"' value="0">
+        </form>
+
+        <form id="e_on_form" method="post" action="" class="hidden_form">
+            <input type="submit" value="LED D Aanzetten">
+            <input type="hidden" name='"light_E"' value="1">
+        </form>
+
+        <form id="e_off_form" method="post" action="" class="hidden_form">
+            <input type="submit" value="LED D Uitzetten">
+            <input type="hidden" name='"light_E"' value="0">
+        </form>
+
+        <p id="led_c_value" class="hidden_value">:="light_C":</p>
+        <p id="led_d_value" class="hidden_value">:="light_D":</p>
+        <p id="led_e_value" class="hidden_value">:="light_E":</p>
+
+    </body>
 </html>
+
+
+
+
+
